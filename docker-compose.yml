@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+    budget-tracker:
+        build:
+            context: .
+            dockerfile: Dockerfile.Dev
+        volumes:
+            - '.:/app'
+            - '/app/node_modules'
+        ports:
+            - 3000:3000
