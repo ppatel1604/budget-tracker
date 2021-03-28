@@ -1,24 +1,24 @@
-version: '3.7'
+version: "3.7"
 
 services:
-    budget-tracker:
-        build:
-            context: .
-            dockerfile: Dockerfile.Dev
-        volumes:
-            - '.:/app'
-            - '/app/node_modules'
-        ports:
-            - 3000:3000
-    mssql:
-        restart: always
-        image: mcr.microsoft.com/mssql/server:2019-latest
-        user: root
-        environment:
-            - ACCEPT_EULA=Y
-            - MSSQL_SA_PASSWORD=1StrongPwd!!
-            - MSSQL_PID=Express
-        ports:
-            - 1433:1433
-        volumes:
-            - ./data:/var/opt/mssql/data
+  budget-tracker:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.Dev
+    volumes:
+      - "./client:/app"
+      - "/app/node_modules"
+    ports:
+      - 3000:3000
+  mssql:
+    restart: always
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=1StrongPwd!!
+      - MSSQL_PID=Express
+    ports:
+      - 1433:1433
+    volumes:
+      - ./data:/var/opt/mssql/data
