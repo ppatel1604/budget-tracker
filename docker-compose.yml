@@ -10,3 +10,15 @@ services:
             - '/app/node_modules'
         ports:
             - 3000:3000
+    mssql:
+        restart: always
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        user: root
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=1StrongPwd!!
+            - MSSQL_PID=Express
+        ports:
+            - 1433:1433
+        volumes:
+            - ./data:/var/opt/mssql/data
