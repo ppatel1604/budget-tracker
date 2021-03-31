@@ -1,7 +1,7 @@
 import React from 'react';
 import Budget from './Budget';
-import ExpenseTotal from './ExpenseTotal';
 import Remaining from './Remaining';
+import ExpenseTotal from './ExpenseTotal';
 
 const Header = () => {
     return (

@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context/AppContext';
+import { ExpenseContext } from '../context/AppContext';
 
-const Budget = () => {
-    const { budget } = useContext(AppContext);
+const Budget: React.FC = () => {
+    const {
+        state: { budget },
+    } = useContext(ExpenseContext);
 
     return (
         <div className='alert alert-secondary'>

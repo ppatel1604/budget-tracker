@@ -1,19 +1,19 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ExpenseList from './components/ExpenseList';
-import AddExpenseForm from './components/AddExpenseForm';
-import { AppProvider } from './context/AppContext';
 import Header from './components/Header';
+import AddExpenseForm from './components/AddExpenseForm';
+import ExpenseList from './components/ExpenseList';
+import ExpenseState from './context/AppContext';
 
 const App = () => {
     return (
-        <AppProvider>
+        <ExpenseState>
             <div className='container'>
                 <Header />
                 <ExpenseList />
                 <AddExpenseForm />
             </div>
-        </AppProvider>
+        </ExpenseState>
     );
 };
 

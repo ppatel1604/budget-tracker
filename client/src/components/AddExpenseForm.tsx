@@ -1,26 +1,30 @@
 import React, { useContext, useState } from 'react';
-import { AppContext } from '../context/AppContext';
-import { v4 as uuidv4 } from 'uuid';
+import { ExpenseContext } from '../context/AppContext';
+import { IExpenseItem } from '../interfaces/ExpenseItem';
 
 const AddExpenseForm = () => {
-    const { dispatch } = useContext(AppContext);
+    const {
+        state: { expenses },
+        dispatch: { addExpense },
+    } = useContext(ExpenseContext);
 
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
 
-    const onSubmit = (event) => {
+    const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        const expense = {
-            id: uuidv4(),
+        const lastExpenseIndex = expenses.length;
+        const lastExpenseId =
+            lastExpenseIndex > 0 ? expenses[lastExpenseIndex - 1].id : 1;
+
+        const expense: IExpenseItem = {
+            id: lastExpenseId + 1,
             name,
             cost: parseInt(cost),
         };
 
-        dispatch({
-            type: 'ADD_EXPENSE',
-            payload: expense,
-        });
+        addExpense(expense);
 
         setName('');
         setCost('');
@@ -36,7 +40,7 @@ const AddExpenseForm = () => {
                             <div className='col-sm'>
                                 <label htmlFor='name'>Name</label>
                                 <input
-                                    required='required'
+                                    required
                                     type='text'
                                     className='form-control'
                                     id='name'
@@ -47,12 +51,12 @@ const AddExpenseForm = () => {
                                 />
                             </div>
                             <div className='col-sm'>
-                                <label htmlFor='cost'>Cost</label>
+                                <label htmlFor='name'>Name</label>
                                 <input
-                                    required='required'
+                                    required
                                     type='text'
                                     className='form-control'
-                                    id='cost'
+                                    id='name'
                                     value={cost}
                                     onChange={(event) =>
                                         setCost(event.target.value)

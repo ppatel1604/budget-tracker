@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context/AppContext';
+import { ExpenseContext } from '../context/AppContext';
 import ExpenseItem from './ExpenseItem';
 
-const ExpenseList = () => {
-    const { expenses } = useContext(AppContext);
+const ExpenseList: React.FC = () => {
+    const {
+        state: { expenses },
+    } = useContext(ExpenseContext);
 
     return (
         <>
@@ -13,12 +15,12 @@ const ExpenseList = () => {
                     <div className='row mt-3'>
                         <div className='col-sm'>
                             <ul className='list-group'>
-                                {expenses.map((expense) => (
+                                {expenses.map((exp) => (
                                     <ExpenseItem
-                                        key={expense.id}
-                                        id={expense.id}
-                                        name={expense.name}
-                                        cost={expense.cost}
+                                        key={exp.id}
+                                        id={exp.id}
+                                        name={exp.name}
+                                        cost={exp.cost}
                                     />
                                 ))}
                             </ul>
