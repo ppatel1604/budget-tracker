@@ -15,11 +15,9 @@ const AddExpenseForm = () => {
         event.preventDefault();
 
         const lastExpenseIndex = expenses.length;
-        const lastExpenseId =
-            lastExpenseIndex > 0 ? expenses[lastExpenseIndex - 1].id : 1;
 
         const expense: IExpenseItem = {
-            id: lastExpenseId + 1,
+            id: lastExpenseIndex + 1,
             name,
             cost: parseInt(cost),
         };
@@ -51,7 +49,7 @@ const AddExpenseForm = () => {
                                 />
                             </div>
                             <div className='col-sm'>
-                                <label htmlFor='name'>Name</label>
+                                <label htmlFor='name'>Cost</label>
                                 <input
                                     required
                                     type='text'
