@@ -1,11 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { getData } from '../api/api';
 import { ExpenseContext } from '../context/AppContext';
 import ExpenseItem from './ExpenseItem';
 
 const ExpenseList: React.FC = () => {
     const {
         state: { expenses },
+        dispatch: { setExpenses },
     } = useContext(ExpenseContext);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response: any = await getData();
+                setExpenses(response);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>

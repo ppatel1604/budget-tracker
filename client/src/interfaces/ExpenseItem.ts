@@ -1,5 +1,5 @@
 export interface IExpenseItem {
-    id: number;
+    id: string;
     name: string;
     cost: number;
 }

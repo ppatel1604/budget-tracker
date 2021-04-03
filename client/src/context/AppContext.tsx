@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useReducer } from 'react';
+import { createContext, FC, ReactNode, useMemo, useReducer } from 'react';
 import { IExpenseItem } from '../interfaces/ExpenseItem';
 import { Expense, ExpenseAction } from '../types/ExpenseType';
 
@@ -15,18 +15,15 @@ interface IContextProps {
     state: IExpenseState;
     dispatch: {
         addExpense: (expenseItem: IExpenseItem) => void;
-        deleteExpense: (id: number) => void;
+        deleteExpense: (id: string) => void;
+        setExpenses: (expenses: IExpenseItem[]) => IExpenseItem[];
     };
 }
 
 export type ExpenseRootAction = ExpenseAction;
 
 const contextDefaultValues: IExpenseState = {
-    expenses: [
-        { id: 1, name: 'first', cost: 100 },
-        { id: 2, name: 'second', cost: 200 },
-        { id: 3, name: 'third', cost: 300 },
-    ],
+    expenses: [],
     budget: 2000,
 };
 
@@ -35,6 +32,11 @@ export const ExpenseRootReducer = (
     action: ExpenseRootAction,
 ): IExpenseState => {
     switch (action.type) {
+        case Expense.SET_EXPENSES:
+            return {
+                ...state,
+                expenses: action.payload.expenses,
+            };
         case Expense.ADD_EXPENSE:
             return {
                 ...state,
@@ -60,6 +62,14 @@ const ExpenseState: FC<IExpenseStateProps> = ({ children }) => {
         contextDefaultValues,
     );
 
+    const setExpenses = (expenses: IExpenseItem[]): IExpenseItem[] => {
+        dispatch({
+            type: Expense.SET_EXPENSES,
+            payload: { expenses },
+        });
+        return expenses;
+    };
+
     const addExpense = (expense: IExpenseItem) => {
         dispatch({
             type: Expense.ADD_EXPENSE,
@@ -67,17 +77,27 @@ const ExpenseState: FC<IExpenseStateProps> = ({ children }) => {
         });
     };
 
-    const deleteExpense = (id: number) => {
+    const deleteExpense = (id: string) => {
         dispatch({
             type: Expense.DELETE_EXPENSE,
             payload: { id },
         });
     };
 
+    const value = useMemo(
+        () => ({
+            state,
+            dispatch: {
+                setExpenses,
+                addExpense,
+                deleteExpense,
+            },
+        }),
+        [state],
+    );
+
     return (
-        <ExpenseContext.Provider
-            value={{ state, dispatch: { addExpense, deleteExpense } }}
-        >
+        <ExpenseContext.Provider value={value}>
             {children}
         </ExpenseContext.Provider>
     );

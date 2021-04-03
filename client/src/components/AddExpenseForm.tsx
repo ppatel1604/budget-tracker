@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { ExpenseContext } from '../context/AppContext';
 import { IExpenseItem } from '../interfaces/ExpenseItem';
+import { v4 as uuidv4 } from 'uuid';
 
 const AddExpenseForm = () => {
     const {
-        state: { expenses },
         dispatch: { addExpense },
     } = useContext(ExpenseContext);
 
@@ -14,10 +14,8 @@ const AddExpenseForm = () => {
     const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        const lastExpenseIndex = expenses.length;
-
         const expense: IExpenseItem = {
-            id: lastExpenseIndex + 1,
+            id: uuidv4(),
             name,
             cost: parseInt(cost),
         };

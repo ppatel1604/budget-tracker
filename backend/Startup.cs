@@ -12,6 +12,8 @@ namespace backend
 {
     public class Startup
     {
+        readonly string localDevelopment = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +34,13 @@ namespace backend
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend", Version = "v1" });
             });
 
+            services.AddCors( opt => {
+                opt.AddPolicy(name: localDevelopment,
+                builder => {
+                    builder.WithOrigins("http://localhost:3000");
+                });
+            });
+
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
         }
 
@@ -48,6 +57,8 @@ namespace backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(localDevelopment);
 
             app.UseAuthorization();
 
