@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  budget-tracker:
+  budget-tracker-frontend:
     build:
       context: ./client
       dockerfile: Dockerfile.Dev
@@ -10,13 +10,22 @@ services:
       - "/app/node_modules"
     ports:
       - 3000:3000
+  budget-tracker-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.Dev
+    ports:
+      - 5000:80
+    environment:
+      - "ConnectionStrings__DefaultConnection=Server=mssql;Database=BudgetTracker;User Id=sa;Password=1StrongPwd!!"
+      #- ASPNETCORE_Okta__ClientId: "{yourClientId}"
   mssql:
     restart: always
     image: mcr.microsoft.com/mssql/server:2019-latest
     user: root
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=1StrongPwd!!
+      - SA_PASSWORD=1StrongPwd!!
       - MSSQL_PID=Express
     ports:
       - 1433:1433

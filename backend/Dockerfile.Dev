@@ -1,0 +1,21 @@
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS base
+WORKDIR /app
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /src
+COPY ["backend.csproj", "./"]
+RUN dotnet restore "backend.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "backend.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "backend.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+# The lines below are needed to resolve the Globalization Invariant Mode is not supported issue
+RUN apk add icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+ENTRYPOINT ["dotnet", "backend.dll"]
