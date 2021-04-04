@@ -1,9 +1,9 @@
 import { BackendHostName, FrontendHostName } from './HostName';
 
 const setBackendHost = (): string => {
-    const hostName = window && window.location && window.location.hostname;
-
-    switch (hostName) {
+    const hostname = window && window.location && window.location.hostname;
+    
+    switch (hostname) {
         case FrontendHostName.PRODUCTION:
             return BackendHostName.PRODUCTION;
         case FrontendHostName.STAGING:
