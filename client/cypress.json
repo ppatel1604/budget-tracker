@@ -1,0 +1,7 @@
+{
+    "env": {
+        "foo": "bar",
+        "baz": "quux",
+        "env_url": "http://localhost:3000"
+    }
+}
