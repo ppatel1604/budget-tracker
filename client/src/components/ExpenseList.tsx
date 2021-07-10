@@ -24,7 +24,7 @@ const ExpenseList: React.FC = () => {
 
     return (
         <>
-            {expenses.length > 0 && (
+            {expenses && expenses.length > 0 && (
                 <>
                     <h3 className='mt-3'>Expenses</h3>
                     <div className='row mt-3'>

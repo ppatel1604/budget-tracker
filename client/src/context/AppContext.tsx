@@ -40,7 +40,7 @@ export const ExpenseRootReducer = (
         case Expense.ADD_EXPENSE:
             return {
                 ...state,
-                expenses: [...state.expenses, action.payload.expense],
+                expenses: state.expenses && state.expenses.length > 0 ? [...state.expenses, action.payload.expense] : [action.payload.expense],
             };
         case Expense.DELETE_EXPENSE:
             return {

@@ -6,9 +6,12 @@ const Remaining = () => {
         state: { expenses, budget },
     } = useContext(ExpenseContext);
 
-    const totalExpenses = expenses.reduce((total, item) => {
-        return (total = total + item.cost);
-    }, 0);
+    const totalExpenses =
+        expenses && expenses.length > 0
+            ? expenses.reduce((total, item) => {
+                  return (total = total + item.cost);
+              }, 0)
+            : 0;
 
     const alertType = totalExpenses > budget ? 'alert-danger' : 'alert-success';
 

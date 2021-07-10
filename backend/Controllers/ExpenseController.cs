@@ -28,7 +28,7 @@ namespace backend.Controllers
             return Ok(expenses);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute]Guid id)
         {
             var expense = await _expenseRepository.GetAsync(id);
@@ -42,7 +42,7 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody]Expense expense)
         {
-            if (string.IsNullOrWhiteSpace(expense.Name) || expense.Cost == 0)
+            if (string.IsNullOrWhiteSpace(expense.Name))
             {
                 const string message = "Please provide name and cost for the expense";
                 _logger.LogError(message, expense);
@@ -62,7 +62,7 @@ namespace backend.Controllers
             );
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteAsync([FromRoute]Guid id)
         {
             if (id == Guid.Empty)

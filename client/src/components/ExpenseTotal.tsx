@@ -6,9 +6,12 @@ const ExpenseTotal: React.FC = () => {
         state: { expenses },
     } = useContext(ExpenseContext);
 
-    const totalExpense = expenses.reduce((total, item) => {
-        return (total += item.cost);
-    }, 0);
+    const totalExpense =
+        expenses && expenses.length > 0
+            ? expenses.reduce((total, item) => {
+                  return (total += item.cost);
+              }, 0)
+            : 0;
 
     return (
         <div className='alert alert-primary'>
