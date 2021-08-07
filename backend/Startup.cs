@@ -12,7 +12,7 @@ namespace backend
 {
     public class Startup
     {
-        readonly string localDevelopment = "_myAllowSpecificOrigins";
+        private const string LocalDevelopment = "_myAllowSpecificOrigins";
 
         public Startup(IConfiguration configuration)
         {
@@ -35,7 +35,7 @@ namespace backend
             });
 
             services.AddCors( opt => {
-                opt.AddPolicy(name: localDevelopment,
+                opt.AddPolicy(name: LocalDevelopment,
                 builder => {
                     builder.WithOrigins("http://localhost:3000");
                 });
@@ -58,7 +58,7 @@ namespace backend
 
             app.UseRouting();
 
-            app.UseCors(localDevelopment);
+            app.UseCors(LocalDevelopment);
 
             app.UseAuthorization();
 
