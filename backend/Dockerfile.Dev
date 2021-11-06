@@ -18,4 +18,6 @@ COPY --from=publish /app/publish .
 # The lines below are needed to resolve the Globalization Invariant Mode is not supported issue
 RUN apk add icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+EXPOSE 80
+EXPOSE 443
 ENTRYPOINT ["dotnet", "backend.dll"]

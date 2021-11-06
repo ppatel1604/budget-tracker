@@ -9,7 +9,7 @@ const Remaining = () => {
     const totalExpenses =
         expenses && expenses.length > 0
             ? expenses.reduce((total, item) => {
-                  return (total = total + item.cost);
+                  return total + item.cost;
               }, 0)
             : 0;
 

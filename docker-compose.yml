@@ -1,23 +1,6 @@
 version: "3.7"
 
 services:
-  budget-tracker-frontend:
-    build:
-      context: ./client
-      dockerfile: Dockerfile.Dev
-    volumes:
-      - "./client:/app"
-      - "/app/node_modules"
-    ports:
-      - 3000:3000
-  budget-tracker-backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.Dev
-    ports:
-      - 5000:80
-    environment:
-      - "ConnectionStrings__DefaultConnection=Server=mssql;Database=BudgetTracker;User Id=sa;Password=1StrongPwd!!"
   mssql:
     restart: always
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -30,3 +13,27 @@ services:
       - 1433:1433
     volumes:
       - ./data:/var/opt/mssql/data
+  budget-tracker-backend:
+    depends_on:
+      - mssql
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.Dev
+    ports:
+      - 5000:80
+      - 5001:443
+    environment:
+      - "ConnectionStrings__DefaultConnection=Server=mssql;Database=BudgetTracker;User Id=sa;Password=1StrongPwd!!"
+  budget-tracker-frontend:
+    depends_on:
+      - budget-tracker-backend
+    build:
+      context: ./client
+      dockerfile: Dockerfile.Dev
+    volumes:
+      - "./client:/app"
+      - "/app/node_modules"
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_BACKEND_HOST=http://host.docker.internal:5000
