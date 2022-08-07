@@ -36,8 +36,11 @@ namespace backend
 
             services.AddCors( opt => {
                 opt.AddPolicy(name: LocalDevelopment,
-                builder => {
-                    builder.WithOrigins("http://localhost:3000");
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 });
             });
 

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ExpenseContext } from '../context/AppContext';
 import { IExpenseItem } from '../interfaces/ExpenseItem';
 import { v4 as uuidv4 } from 'uuid';
+import { postData } from '../api/api';
 
 const AddExpenseForm = () => {
     const {
@@ -11,7 +12,7 @@ const AddExpenseForm = () => {
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
 
-    const onSubmit = (event: React.FormEvent) => {
+    const onSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         const expense: IExpenseItem = {
@@ -20,10 +21,15 @@ const AddExpenseForm = () => {
             cost: parseInt(cost),
         };
 
-        addExpense(expense);
+        try {
+            const response: IExpenseItem = await postData(expense);
+            if (response) {
+                addExpense(expense);
 
-        setName('');
-        setCost('');
+                setName('');
+                setCost('');
+            }
+        } catch (error) {}
     };
 
     return (

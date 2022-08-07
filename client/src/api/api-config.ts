@@ -2,7 +2,7 @@ import { BackendHostName, FrontendHostName } from './HostName';
 
 const setBackendHost = (): string => {
     const hostname = window && window.location && window.location.hostname;
-    
+
     switch (hostname) {
         case FrontendHostName.PRODUCTION:
             return BackendHostName.PRODUCTION;
@@ -12,7 +12,7 @@ const setBackendHost = (): string => {
             return BackendHostName.TEST;
         default:
             return (
-                process.env.REACT_APP_BACKEND_HOST || 'http://localhost:5000'
+                process.env.REACT_APP_BACKEND_HOST || 'https://localhost:5001'
             );
     }
 };

@@ -24,6 +24,12 @@ services:
       - 5001:443
     environment:
       - "ConnectionStrings__DefaultConnection=Server=mssql;Database=BudgetTracker;User Id=sa;Password=1StrongPwd!!"
+      - "ASPNETCORE_URLS=https://+;http://+"
+      - "ASPNETCORE_HTTPS_PORT=5001"
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - "${HOME}/.aspnet:/https/"
   budget-tracker-frontend:
     depends_on:
       - budget-tracker-backend
@@ -36,4 +42,4 @@ services:
     ports:
       - 3000:3000
     environment:
-      - REACT_APP_BACKEND_HOST=http://localhost:5002
+      - REACT_APP_BACKEND_HOST=https://localhost:5001
