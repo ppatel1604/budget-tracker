@@ -29,3 +29,12 @@ export const postData = async (item: IExpenseItem) => {
         console.error(error);
     }
 };
+
+export const deleteData = async (id: string) => {
+    try {
+        const res = axios.delete(`${API_ROOT}/expense/${id}`);
+        return (await res).data;
+    } catch (error) {
+        console.error(error);
+    }
+};
