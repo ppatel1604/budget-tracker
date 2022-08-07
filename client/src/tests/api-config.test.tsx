@@ -22,7 +22,7 @@ test('should return test backend url for test frontend', () => {
 
 test('should return development backend url for development frontend', () => {
     const config = setupTest('http://localhost:3000');
-    expect(config.API_ROOT).toEqual('http://localhost:5000');
+    expect(config.API_ROOT).toEqual('https://localhost:5001');
 });
 
 const setupTest = (hostName: string) => {
