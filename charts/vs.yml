@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpbin
+  namespace: default
+spec:
+  gateways:
+  - budget-tracker-gateway
+  hosts:
+  - dev.demo.com
+  http:
+  - name: budget-tracker-backend
+    match:
+    - uri:
+        prefix: expense
+    route:
+    - destination:
+        host: budget-tracker-backend-service
+        port:
+          number: 80
+  - name: budget-tracker-client
+    match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: budget-tracker-client-service
+        port:
+          number: 3000
+    retries:
+      attempts: 3
+      perTryTimeout: 0.1s
+      retryOn: gateway-error,connect-failure,refused-stream

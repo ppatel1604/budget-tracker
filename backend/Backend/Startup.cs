@@ -1,3 +1,4 @@
+using System;
 using backend.Data;
 using backend.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -19,13 +20,13 @@ namespace backend
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-        
+            
             services.AddDbContext<ExpenseDbContext>(opt =>  opt.UseSqlServer(connectionString));
 
             services.AddControllers();
@@ -41,6 +42,14 @@ namespace backend
                     builder.WithOrigins("http://localhost:3000")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
+
+                    builder.WithOrigins("http://dev.demo.com")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    
+                    builder.WithOrigins("http://budget-tracker-backend-service")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 });
             });
 
@@ -50,6 +59,12 @@ namespace backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

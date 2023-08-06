@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-vs
+spec:
+  gateways:
+  - budget-tracker-gateway
+  hosts:
+  - dev.demo.com
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: {{ .Release.Name }}-service
+        port:
+            number: 80
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: DestinationRule
+# metadata:
+#   name: {{ .Release.Name }}-dr
+# spec:
+#   host: dev.demo.com
+#   trafficPolicy:
+#     tls:
+#       mode: DISABLE

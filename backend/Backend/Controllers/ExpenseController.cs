@@ -34,7 +34,7 @@ namespace backend.Controllers
             var expense = await _expenseRepository.GetAsync(id);
             if (expense == null)
             {
-                _logger.LogInformation($"No expense exist with id:{id}");
+                _logger.LogInformation("No expense exist with id:{Id}", id);
             }
             return Ok(expense);
         }
@@ -45,7 +45,7 @@ namespace backend.Controllers
             if (string.IsNullOrWhiteSpace(expense.Name))
             {
                 const string message = "Please provide name and cost for the expense";
-                _logger.LogError(message, expense);
+                _logger.LogError(message);
                 return BadRequest(message);
             }
 
@@ -83,7 +83,8 @@ namespace backend.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message, e);
+                var message = e.Message;
+                _logger.LogError(message);
                 return StatusCode((int) HttpStatusCode.InternalServerError);
             }
         }

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend", "Backend\backend.csproj", "{542C541A-C300-4C55-A78E-D7C21EB0F270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.Tests", "backend.Tests\backend.Tests.csproj", "{EB51C9EF-DCD3-403F-BDBD-3AF2D161EBA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{542C541A-C300-4C55-A78E-D7C21EB0F270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542C541A-C300-4C55-A78E-D7C21EB0F270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{542C541A-C300-4C55-A78E-D7C21EB0F270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{542C541A-C300-4C55-A78E-D7C21EB0F270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB51C9EF-DCD3-403F-BDBD-3AF2D161EBA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB51C9EF-DCD3-403F-BDBD-3AF2D161EBA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB51C9EF-DCD3-403F-BDBD-3AF2D161EBA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB51C9EF-DCD3-403F-BDBD-3AF2D161EBA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

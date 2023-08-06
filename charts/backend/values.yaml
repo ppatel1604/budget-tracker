@@ -1,0 +1,12 @@
+image:
+  repo: 160492
+  name: budget-tracker-backend
+
+port:
+  value: 80
+  target: 80
+  protocol: TCP
+
+Config:
+  connectionString: Server=host.docker.internal;Database=BudgetTracker;User Id=sa;Password=1StrongPwd!!
+  

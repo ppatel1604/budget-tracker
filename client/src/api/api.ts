@@ -2,9 +2,13 @@ import { IExpenseItem } from '../interfaces/ExpenseItem';
 import { API_ROOT } from './api-config';
 const axios = require('axios');
 
+const instance = axios.create({
+    baseURL: `${API_ROOT}`,
+});
+
 export const getData = async () => {
     try {
-        const res = axios.get(`${API_ROOT}/expense`);
+        const res = instance.get(`/expense`);
         return (await res).data;
     } catch (error) {
         console.error(error);
@@ -19,8 +23,8 @@ export const postData = async (item: IExpenseItem) => {
                 'Content-Type': 'application/json',
             },
         };
-        const result = await axios.post(
-            `${API_ROOT}/expense`,
+        const result = await instance.post(
+            `/expense`,
             itemString,
             customConfig,
         );
@@ -32,7 +36,7 @@ export const postData = async (item: IExpenseItem) => {
 
 export const deleteData = async (id: string) => {
     try {
-        const res = axios.delete(`${API_ROOT}/expense/${id}`);
+        const res = instance.delete(`expense/${id}`);
         return (await res).data;
     } catch (error) {
         console.error(error);

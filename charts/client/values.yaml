@@ -1,0 +1,9 @@
+image:
+  repo: 160492
+  name: budget-tracker-client
+
+port:
+  value: 80
+  target: 3000
+  protocol: TCP
+  

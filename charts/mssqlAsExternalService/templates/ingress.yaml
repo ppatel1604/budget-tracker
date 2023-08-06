@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+  namespace: default
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: dev.demo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-service
+                port:
+                  number: {{ .Values.port.value }}
+          - path: /expense
+            pathType: Prefix
+            backend:
+              service:
+                name: budget-tracker-backend-service
+                port:
+                  number: 80
+status:
+  loadBalancer:
+    ingress:
+      - hostname: localhost
