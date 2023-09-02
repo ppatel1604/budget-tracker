@@ -1,9 +1,9 @@
 import { IExpenseItem } from '../interfaces/ExpenseItem';
 import { API_ROOT } from './api-config';
-import axios from "axios";
+const axios = require('axios');
 
 const instance = axios.create({
-    baseURL: `${API_ROOT}`
+    baseURL: `${API_ROOT}`,
 });
 
 export const getData = async () => {

@@ -12,6 +12,7 @@ const ExpenseItem = ({ id, name, cost }: IExpenseItem) => {
     const onDeleteClick = async (id: string) => {
         try {
             const deleteResponse = await deleteData(id);
+            console.log(deleteResponse);
             if (!deleteResponse) {
                 deleteExpense(id);
             }
