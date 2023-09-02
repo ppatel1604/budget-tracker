@@ -4,6 +4,6 @@ image:
 
 port:
   value: 80
-  target: 3000
+  target: 80
   protocol: TCP
   
