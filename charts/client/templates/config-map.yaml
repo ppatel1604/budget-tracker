@@ -7,4 +7,4 @@ metadata:
     app: {{ .Release.Name }}
     version: v1
 data:
-  REACT_APP_BACKEND_HOST: http://dev.demo.com
+  REACT_APP_BACKEND_HOST: http://budget-tracker-backend-service.budget-tracker.svc.cluster.local
