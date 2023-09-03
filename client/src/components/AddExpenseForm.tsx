@@ -58,7 +58,7 @@ const AddExpenseForm = () => {
                                     required
                                     type='text'
                                     className='form-control'
-                                    id='name'
+                                    id='cost'
                                     value={cost}
                                     onChange={(event) =>
                                         setCost(event.target.value)

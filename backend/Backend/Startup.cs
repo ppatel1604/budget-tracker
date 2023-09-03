@@ -50,6 +50,7 @@ namespace backend
                     builder.WithOrigins("http://budget-tracker-backend-service")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
+
                 });
             });
 
