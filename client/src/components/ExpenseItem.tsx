@@ -25,7 +25,7 @@ const ExpenseItem = ({ id, name, cost }: IExpenseItem) => {
         <li className='list-group-item d-flex justify-content-between align-items-center'>
             {name}
             <div>
-                <span className='badge badge-primary badge-pill mr-3'>
+                <span className='badge bg-primary rounded-pill mr-3'>
                     ${cost}
                 </span>
                 <TiDelete

@@ -1,5 +1,5 @@
 import { IExpenseItem } from '../interfaces/ExpenseItem';
-const axios = require('axios');
+import axios, * as others from 'axios';
 
 export const getData = async () => {
     try {
