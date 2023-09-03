@@ -31,3 +31,4 @@
 # local Data
 data
 **/cypress/videos/*
+/client/build
