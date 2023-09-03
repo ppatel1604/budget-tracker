@@ -11,7 +11,6 @@ RUN npm run build
 
 FROM nginx
 ENV NODE_ENV production
-ENV REACT_APP_API_URL http://budget-tracker-backend-service.budget-tracker.svc.cluster.local
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80

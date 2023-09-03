@@ -1,5 +1,4 @@
 import { IExpenseItem } from '../interfaces/ExpenseItem';
-import { API_ROOT } from './api-config';
 const axios = require('axios');
 
 export const getData = async () => {
